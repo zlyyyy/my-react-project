@@ -2,8 +2,12 @@ import React from 'react'
 import Reactdom from 'react-dom'
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import App from './app'
-import { counter, addNum, removeNum, addNumAsync } from './index.redux'
+import { Provider } from 'react-redux'
+import { BrowserRouter, Link, Route } from 'react-router-dom'
+import App from './App'
+import { counter } from './index.redux'
+import { Button } from 'antd-mobile'
+import './config';
 
 
 // 创建 Redux store 来存放应用的状态。
@@ -12,13 +16,37 @@ const store = createStore(counter,compose(
     window.devToolsExtension? window.devToolsExtension():f=>f
 ))
 
-function render(){
-    Reactdom.render(<App store={store} addNum={addNum} removeNum={removeNum} addNumAsync={addNumAsync} />,document.getElementById('root'))
+function Two(){
+    return <h2>周二</h2>
 }
-render()
+function Three(){
+    return <Button type='primary'>周三</Button>
+}
+Reactdom.render(
+    <Provider store={store}>
+        <BrowserRouter>
+            <div>
+                <ul>
+                    <li><Link to='/'>周一</Link></li>
+                    <li><Link to='/two'>周二</Link></li>
+                    <li><Link to='/three'>周三</Link></li>
+                    <Button type='primary'>周三</Button>
+                </ul>
+                <Route path='/' exact component={App}></Route>
+                <Route path='/two' component={Two}></Route>
+                <Route path='/three' component={Three}></Route>
+            </div>
+        </BrowserRouter>
+    </Provider>,
+    document.getElementById('root')
+)
+// function render(){
+//     Reactdom.render(<App store={store} addNum={addNum} removeNum={removeNum} addNumAsync={addNumAsync} />,document.getElementById('root'))
+// }
+// render()
 
-//手动更新
-store.subscribe(render)
+// //手动更新
+// store.subscribe(render)
 // function counter(state = 0, action){
 //     switch (action.type) {
 //         case 'INCREMENT' :
