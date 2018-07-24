@@ -1,7 +1,14 @@
 const express = require('express')
+const bodyParser = require('body-parser')
+const cookieParser =require('cookie-parser')
+
 const userRouter = require('./user')
 
 const app = express()
+//post解析
+app.use(cookieParser())
+app.use(bodyParser.json())
+
 app.use('/user',userRouter)
 //监听路由
 // app.get('/',function(req,res){
