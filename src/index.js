@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter, Route,Switch } from 'react-router-dom'
 
 import AuthRoute from './component/authroute/authroute';
+import BossInfo from './container/bossinfo/bossinfo'
 import Login from './container/login/login';
 import Register from './container/register/register';
 import reducers from './reducer'
@@ -18,16 +19,13 @@ const store = createStore(reducers,compose(
     applyMiddleware(thunk),
     window.devToolsExtension? window.devToolsExtension():f=>f
 ))
-function Boss(){
-    return <h1>BOSS</h1>
-}
 Reactdom.render(
     <Provider store={store}>
         <BrowserRouter>
             <div>
                 <AuthRoute></AuthRoute>
                 <Switch>
-                    <Route path='/boss' component={Boss} ></Route>
+                    <Route path='/bossinfo' component={BossInfo} ></Route>
                     <Route path='/login' component={Login} ></Route>
                     <Route path='/register' component={Register} ></Route>
                 </Switch>

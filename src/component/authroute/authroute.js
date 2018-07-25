@@ -20,7 +20,6 @@ class AuthRoute extends React.Component{
         axios.get('/user/info')
         .then(res=>{
             if(res.status === 200){
-                console.log(res.data)
                 if(res.data.code === 0){
                     this.props.loadData(res.data.data)
                 }else{
@@ -33,7 +32,7 @@ class AuthRoute extends React.Component{
         
     }
     render(){
-        return <h1>测试</h1>
+        return null
     }
 }
 export default AuthRoute

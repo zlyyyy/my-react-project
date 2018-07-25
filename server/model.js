@@ -11,7 +11,7 @@ const models = {
         //头像
         'avatar':{type:String},
         //个人简介或者职位描述
-        'desc':{type:String},
+        'dec':{type:String},
         //职位名
         'title':{type:String},
         //boss两个字段
