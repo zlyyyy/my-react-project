@@ -8,13 +8,13 @@ const initState={
     redirectTo: '',
     msg: '',
     user: '',
-    pwd: '',
     type: ''
 }
 //reducer
 export function user(state=initState,action){
     switch(action.type){
         case AUTH_SUCCESS:
+            console.log(action)
             return {...state, msg: '', redirectTo:getRedirecPath(action.payload), ...action.payload}
         case LOAD_DATA:
             return {...state, ...action.payload}
@@ -26,7 +26,9 @@ export function user(state=initState,action){
 }
 
 //完善信息
-function authSuccess(data) {
+function authSuccess(obj) {
+    //过滤密码字段
+    const {pwd,...data} = obj
     return { type:AUTH_SUCCESS, payload:data }
 }
 // //登录成功
