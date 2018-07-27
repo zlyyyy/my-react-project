@@ -30,7 +30,6 @@ class Login extends React.Component{
     }
     handleLogin(){
         this.props.login(this.state)
-        console.log(this.state)
     }
     render(){
         return (
