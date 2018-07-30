@@ -16,7 +16,6 @@ class AuthRoute extends React.Component{
         if(publicList.indexOf(pathname)>-1){
             return null
         }
-        console.log(this.props)
         axios.get('/user/info')
         .then(res=>{
             if(res.status === 200){
