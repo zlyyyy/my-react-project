@@ -5,7 +5,7 @@ import { WingBlank, WhiteSpace, Card } from 'antd-mobile';
 
 class UserCard extends React.Component{
     static propTypes = {
-        userlist: PropTypes.func.isRequired
+        userlist: PropTypes.array.isRequired
     }
     render(){
         return(
@@ -13,14 +13,14 @@ class UserCard extends React.Component{
                 <WhiteSpace></WhiteSpace>
                 {this.props.userlist.map(v=>(
                     v.avatar?
-                    <Card>
+                    <Card key={v._id}>
                         <Card.Header
                             title={v.user}
                             thumb={require(`../img/${v.avatar}.png`)}
                             extra={<span>{v.title}</span>}
                         ></Card.Header>
                         <Card.Body>
-                            {v.type==='boss'?<div>公司:{v.companny}</div> : null}
+                            {v.type==='boss'?<div>公司:{v.company}</div> : null}
                             {v.desc.split('\n').map(d=>(
                                 <div key={d}>{d}</div>
                             ))}

@@ -2,6 +2,7 @@ import Axios from "axios";
 import { getRedirecPath } from "../util";
 
 const AUTH_SUCCESS = 'AUTH_SUCCESS'
+const LOGO_OUT = 'LOGO_OUT'
 const ERROR_MSG = 'ERROR_MSG'
 const LOAD_DATA = 'LOAD_DATA'
 const initState={
@@ -16,6 +17,8 @@ export function user(state=initState,action){
         case AUTH_SUCCESS:
             console.log(action)
             return {...state, msg: '', redirectTo:getRedirecPath(action.payload), ...action.payload}
+        case LOGO_OUT:
+            return {...initState,redirectTo:'/login'}
         case LOAD_DATA:
             return {...state, ...action.payload}
         case ERROR_MSG:
@@ -48,7 +51,10 @@ function errorMsg(msg){
 export function loadData(userinfo) {
     return { type: LOAD_DATA, payload:userinfo}
 }
-
+//退出登录
+export function logoutSubmit(){
+    return { type:LOGO_OUT }
+}
 
 //完善信息
 export function update(data){

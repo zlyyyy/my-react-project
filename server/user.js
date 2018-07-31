@@ -7,9 +7,11 @@ const User = model.getModel('user')
 const _filter = {'pwd':0,'__v':0}
 
 Router.get('/list',function(req,res){
+    //request response
     //清除所有数据
     const { type } = req.query
-    // User.remove({},function(e,d){})
+    console.log(req.query)
+    // User.remove({type:'boss'},function(e,d){})
     User.find({type},function(err,doc){
         return res.json({code:0,data:doc})
     })
@@ -31,7 +33,7 @@ Router.post('/update',function(req,res){
 Router.post('/login',function(req,res){
     const {user, pwd} = req.body
     User.findOne({user,pwd:md5Pwd(pwd)},_filter,function(err,doc){
-        console.log(doc)
+        // console.log(doc)
         if(!doc){
             return res.json({code:1,msg:'用户名或密码错误'})
         }

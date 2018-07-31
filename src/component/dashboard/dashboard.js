@@ -52,7 +52,7 @@ class Dashboard extends React.Component{
                 <NavBar
                     mode="dark"
                 >{navList.find(v=>v.path===pathname).title}</NavBar>
-                <div style = {{marginTop:50}}>
+                <div>
                     <Switch>
                         {navList.map(v=>(
                             <Route key={v.path} path={v.path} component={v.component}></Route>
