@@ -8,3 +8,12 @@
 	width: 100%;
 	height:auto;
 }
+.am-card{
+	margin-bottom: 10px;
+}
+.stick-footer{
+	z-index:10;
+	position: absolute;
+	bottom: 0;
+	width:100%;
+}
