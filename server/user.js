@@ -6,7 +6,9 @@ const model = require('./model')
 const User = model.getModel('user')
 const Chat = model.getModel('chat')
 const _filter = {'pwd':0,'__v':0}
+// Chat.remove({},function(e,q){
 
+// })
 Router.get('/list',function(req,res){
     //request response
     //清除所有数据
@@ -19,9 +21,9 @@ Router.get('/list',function(req,res){
 })
 Router.get('/getmsglist',function(req,res){
     const user = req.cookies.user
-    Chat.find({},function(req,res){
+    Chat.find({},function(err,doc){
         if(!err){
-            return res.json({code:0,data:doc})
+            return res.json({code:0,msgs:doc})
         }
     })
 })
