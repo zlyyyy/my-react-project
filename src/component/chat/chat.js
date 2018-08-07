@@ -1,5 +1,5 @@
 import React from 'react'
-import { List, InputItem, NavBar } from 'antd-mobile';
+import { List, InputItem, NavBar, Icon } from 'antd-mobile';
 import io from 'socket.io-client'
 import { connect } from 'react-redux'
 import { getMsgList, sendMsg, recvmsg } from '../../redux/chat.redux'
@@ -18,8 +18,11 @@ class Chat extends React.Component{
         }
     }
     componentDidMount(){
-        this.props.getMsgList()
-        this.props.recvmsg()
+        //刷新聊天页面数据
+        if(!this.props.chat.chatmsg.length){
+            this.props.getMsgList()
+            this.props.recvmsg()
+        }
         //on监听
         // socket.on('recvmsg',(data)=>{
         //     this.setState({
@@ -38,23 +41,35 @@ class Chat extends React.Component{
         })
     }
     render(){
-        const user = this.props.match.params.user
+        const userid = this.props.match.params.user
         const Item = List.Item
+        const users = this.props.chat.users
+        if(!users[userid]){
+            return null
+        }
         return(
-            <div>
-                
-                <NavBar mode='dark'>
-                    {this.props.match.params.user}
+            <div id='chat-page'>
+                <NavBar
+                    icon={<Icon type="left" />}
+                    mode='dark'
+                    onLeftClick={()=>{
+                        this.props.history.goBack()
+                    }}
+                >
+                    {users[userid].name}
                 </NavBar>
                 {this.props.chat.chatmsg.map(v=>{
-                    return v.from===user?
+                    const avatar = require(`../img/${users[v.from].avatar}.png`)
+                    return v.from===userid?
                     (<List 
                         key={v._id}>
-                        <Item>{v.content}</Item>
+                        <Item
+                            thumb={avatar}
+                        >{v.content}</Item>
                     </List>):
                     (<List key={v._id}>
                         <Item
-                            extra='我'
+                            extra={<img src={avatar} alt=''/>}
                             className='chat-me'
                         >{v.content}</Item>
                     </List>)
