@@ -2,13 +2,13 @@ import React from 'react'
 import { List, InputItem, NavBar, Icon, Grid } from 'antd-mobile';
 import io from 'socket.io-client'
 import { connect } from 'react-redux'
-import { getMsgList, sendMsg, recvmsg } from '../../redux/chat.redux'
+import { getMsgList, sendMsg, recvmsg, readMsg } from '../../redux/chat.redux'
 import { getChatId } from '../../util'
 const socket = io('ws://localhost:9999')
 
 @connect(
     state=>state,
-    { getMsgList, sendMsg, recvmsg }
+    { getMsgList, sendMsg, recvmsg, readMsg }
 )
 class Chat extends React.Component{
     constructor(props){
@@ -24,13 +24,17 @@ class Chat extends React.Component{
             this.props.getMsgList()
             this.props.recvmsg()
         }
-        
+        const to = this.props.match.params.user
+        this.props.readMsg(to)
         //on监听
         // socket.on('recvmsg',(data)=>{
         //     this.setState({
         //         msg: [...this.state.msg,data.text]
         //     })
         // })
+    }
+    componentWillUnmount(){
+        
     }
     //girl跑马灯效果bug解决
     fixCarousel(){

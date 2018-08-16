@@ -9,7 +9,7 @@ export default function appForm(Com){
             this.handleChange = this.handleChange.bind(this)
         }
         handleChange(key,val){
-            console.log(key,val)
+            // console.log(key,val)
             this.setState({
                 [key]:val
             })
