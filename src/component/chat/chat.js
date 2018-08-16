@@ -24,8 +24,6 @@ class Chat extends React.Component{
             this.props.getMsgList()
             this.props.recvmsg()
         }
-        const to = this.props.match.params.user
-        this.props.readMsg(to)
         //on监听
         // socket.on('recvmsg',(data)=>{
         //     this.setState({
@@ -34,7 +32,8 @@ class Chat extends React.Component{
         // })
     }
     componentWillUnmount(){
-        
+        const to = this.props.match.params.user
+        this.props.readMsg(to)
     }
     //girl跑马灯效果bug解决
     fixCarousel(){
