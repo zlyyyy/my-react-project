@@ -24,6 +24,7 @@ class Chat extends React.Component{
             this.props.getMsgList()
             this.props.recvmsg()
         }
+        // 测试
         //on监听
         // socket.on('recvmsg',(data)=>{
         //     this.setState({
